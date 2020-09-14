@@ -5,6 +5,7 @@ asyncpg==0.21.0
 black==20.8b1
 cffi==1.14.2
 click==7.1.2
+colorlog==4.2.1
 cryptography==3.1
 databases==0.3.2
 dnspython==2.0.0
