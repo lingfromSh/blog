@@ -1,5 +1,6 @@
 from typing import Optional
-from fastapi import APIRouter, Depends, Header, Query
+from fastapi import APIRouter, Depends, Header
+from fastapi.security import OAuth2PasswordBearer
 from sql import schemas, crud, database, models
 from sql.database import db_state_default
 from core import exceptions
@@ -8,6 +9,7 @@ database.db.connect()
 database.db.create_tables([models.User, models.Post, models.Catalog, models.Tag, models.PostCatalog, models.PostTag])
 database.db.close()
 
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 router = APIRouter()
 sleep_time = 10
 

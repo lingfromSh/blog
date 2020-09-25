@@ -16,10 +16,10 @@ async def reset_db_state():
     database.db._state.reset()
 
 
-def get_db(db_state=Depends(reset_db_state)):
+async def get_db(db_state=Depends(reset_db_state)):
     try:
         database.db.connect()
-        yield
+        return
     finally:
         if not database.db.is_closed():
             database.db.close()
