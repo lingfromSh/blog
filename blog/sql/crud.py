@@ -1,3 +1,6 @@
+import peewee
+from core import exceptions
+from typing import List
 from . import models, schemas
 
 
@@ -21,8 +24,11 @@ def create_user(user: schemas.UserCreate):
     fake_hashed_password = user.password + "not_really_hashed_password"
     fake_random_token = "fake_random_token"
     db_user = models.User(username=user.username, hashed_password=fake_hashed_password, token=fake_random_token)
-    db_user.save()
-    return db_user
+    try:
+        db_user.save()
+        return db_user
+    except  peewee.IntegrityError:
+        raise exceptions.UnprocessableEntityHTTPException(detail="用户名重复")
 
 
 def update_user(user: schemas.UserUpdate):
@@ -48,8 +54,26 @@ def get_tags_of_user(user_id: int, skip: int = 0, limit: int = 100):
 
 def create_tag(tag: schemas.TagCreate):
     db_tag = models.Tag(title=tag.title, author_id=tag.author_id)
-    db_tag.save()
+    try:
+        db_tag.save()
+        return db_tag
+    except peewee.IntegrityError:
+        raise exceptions.UnprocessableEntityHTTPException()
+
+
+def update_tag(tag: schemas.TagUpdate):
+    db_tag = get_tag(tag_id=tag.id)
+    if db_tag:
+        db_tag.title = tag.title
+        db_tag.author_id = tag.author_id
     return db_tag
+
+
+def delete_tag(tags: List[schemas.TagDelete]):
+    for tag in tags:
+        db_tag = get_tag(tag_id=tag.id)
+        if not db_tag:
+            db_tag.delete()
 
 
 def get_catalog(catalog_id: int):
@@ -62,8 +86,27 @@ def get_catalogs_of_user(user_id: int, skip: int = 0, limit: int = 100):
 
 def create_catalog(catalog: schemas.CatalogCreate):
     db_catalog = models.Catalog(title=catalog.title, author_id=catalog.author_id)
-    db_catalog.save()
+    try:
+        db_catalog.save()
+        return db_catalog
+    except exceptions.UnprocessableEntityHTTPException:
+        raise exceptions.UnprocessableEntityHTTPException()
+
+
+def update_catalog(catalog: schemas.CatalogUpdate):
+    db_catalog = get_catalog(catalog_id=catalog.id)
+    if db_catalog:
+        db_catalog.title = catalog.title
+        db_catalog.author_id = catalog.author_id
+        db_catalog.save()
     return db_catalog
+
+
+def delete_catalog(catalogs: List[schemas.CatalogDelete]):
+    for catalog in catalogs:
+        db_catalog = get_catalog(catalog_id=catalog.id)
+        if not db_catalog:
+            db_catalog.delete()
 
 
 def get_post(post_id: int):
@@ -76,8 +119,11 @@ def get_posts_of_user(user_id: int, skip: int = 0, limit: int = 100):
 
 def create_post(post: schemas.PostCreate):
     db_post = models.Post(**post.dict())
-    db_post.save()
-    return db_post
+    try:
+        db_post.save()
+        return db_post
+    except peewee.IntegrityError:
+        raise exceptions.UnprocessableEntityHTTPException()
 
 
 def update_post(post: schemas.PostUpdate):
@@ -92,3 +138,40 @@ def update_post(post: schemas.PostUpdate):
         db_post.save()
         return db_post
     return db_post
+
+
+def delete_post(posts: List[schemas.PostDelete]):
+    for post in posts:
+        db_post = get_post(post_id=post.id)
+        if db_post:
+            db_post.delete()
+    return True
+
+
+def get_comment(comment_id: int):
+    return models.Comment.filter(models.Comment.id == comment_id).first()
+
+
+def update_comment(comment: schemas.CommentUpdate):
+    db_comment = get_comment(comment_id=comment.id)
+    if db_comment:
+        db_comment.content = comment.content
+        db_comment.save()
+    return db_comment
+
+
+def delete_comment(comments: List[schemas.CommentDelete]):
+    for comment in comments:
+        db_comment = get_comment(comment_id=comment.id)
+        if db_comment:
+            db_comment.delete()
+
+
+def create_comment(comment: schemas.CommentCreate):
+    # TODO: check comment tree attribute
+    db_comment = models.Comment(**comment.dict())
+    try:
+        db_comment.save()
+        return db_comment
+    except peewee.IntegrityError:
+        raise exceptions.UnprocessableEntityHTTPException()

@@ -9,6 +9,7 @@ class User(Model):
     email = peewee.CharField(max_length=255, null=True)
     token = peewee.CharField(max_length=255, null=True)
 
+
 class Tag(Model):
     title = peewee.CharField(max_length=64, null=False)
     author = peewee.ForeignKeyField(User, backref="created_tags", on_delete="CASCADE")
@@ -16,14 +17,13 @@ class Tag(Model):
 
 class Catalog(Model):
     title = peewee.CharField(max_length=64, null=False)
-    author = peewee.ForeignKeyField(User, backref="created_catalogs", on_delete="CASCADE")
+    author = peewee.ForeignKeyField(
+        User, backref="created_catalogs", on_delete="CASCADE"
+    )
 
 
 class Post(Model):
-    STATUS_CHOICES = (
-        STATUS_PUBLISHED,
-        STATUS_DRAFT
-    ) = range(2)
+    STATUS_CHOICES = (STATUS_PUBLISHED, STATUS_DRAFT) = range(2)
 
     title = peewee.CharField(max_length=32, null=False)
     content = peewee.TextField()

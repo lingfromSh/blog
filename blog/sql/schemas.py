@@ -16,12 +16,6 @@ class PeeweeGetterDict(GetterDict):
         return res
 
 
-class ORMMixin(object):
-    class Config:
-        orm_mode = True
-        getter_dict = PeeweeGetterDict
-
-
 class UserBase(BaseModel):
     username: string32
     password: str
@@ -57,7 +51,16 @@ class TagCreate(TagBase):
     author_id: int
 
 
-class Tag(TagBase, ORMMixin):
+class TagUpdate(TagBase):
+    id: int
+    author_id: int
+
+
+class TagDelete(BaseModel):
+    id: int
+
+
+class Tag(TagBase):
     id: int
     author: User
 
@@ -74,30 +77,46 @@ class CatalogCreate(CatalogBase):
     author_id: int
 
 
-class Catalog(CatalogBase, ORMMixin):
+class Catalog(CatalogBase):
     id: int
     author: User
 
     class Config:
         orm_mode = True
         getter_dict = PeeweeGetterDict
+
+
+class CatalogUpdate(CatalogCreate):
+    id: int
+
+
+class CatalogDelete(BaseModel):
+    id: int
 
 
 class CommentBase(BaseModel):
     content: str
 
 
+class CommentUpdate(CommentBase):
+    id: int
+
+
 class CommentCreate(CommentBase):
     author_id: int
 
 
-class Comment(CommentBase, ORMMixin):
+class Comment(CommentBase):
     id: int
     author: User
 
     class Config:
         orm_mode = True
         getter_dict = PeeweeGetterDict
+
+
+class CommentDelete(BaseModel):
+    id: int
 
 
 class PostBase(BaseModel):
@@ -113,6 +132,10 @@ class PostCreate(PostBase):
 
 
 class PostUpdate(PostCreate):
+    id: int
+
+
+class PostDelete(BaseModel):
     id: int
 
 

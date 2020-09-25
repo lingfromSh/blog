@@ -2,8 +2,11 @@ from contextvars import ContextVar
 
 import peewee
 from datetime import datetime
+from conf import settings
 
-DATABASE_NAME = "test.db"
+
+DATABASE_TYPE = settings.DATABASE_SETTINGS["type"]
+DATABASE_NAME = settings.DATABASE_SETTINGS["url"]
 db_state_default = {"closed": None, "conn": None, "ctx": None, "transactions": None}
 db_state = ContextVar("db_state", default=db_state_default.copy())
 
@@ -20,7 +23,13 @@ class PeeweeConnectionState(peewee._ConnectionState):
         return self._state.get()[name]
 
 
-db = peewee.SqliteDatabase(DATABASE_NAME, check_same_thread=False)
+database_class_mapping = {
+    "sqlite": peewee.SqliteDatabase,
+    "postgres": peewee.PostgresqlDatabase,
+    "mysql": peewee.MySQLDatabase,
+}
+
+db = database_class_mapping[DATABASE_TYPE](DATABASE_NAME, check_same_thread=False)
 
 db._state = PeeweeConnectionState()
 
