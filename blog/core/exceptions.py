@@ -70,7 +70,7 @@ class UnprocessableEntityHTTPException(HTTPException):
     def __init__(
         self,
         status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-        detail="内容有误，无法相应",
+        detail="内容有误，无法响应",
         headers=None,
     ):
         super().__init__(status_code, detail, headers)
