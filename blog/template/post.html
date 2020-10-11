@@ -32,10 +32,16 @@
             </nav>
         </div>
         <div class="container">
-            <h2>{{ post.title }}</h2>
-            <h5>
-                {{ post.content }}
-            </h5>
+            <div class="jumbotron">
+                <h1 class="display-4">{{ post.title }}</h1>
+                <p class="lead">{{ post.summary }}</p>
+                <hr class="my-4"/>
+                <div id="content">
+                    {% markdown %}
+                        {{ post.content }}
+                    {% endmarkdown %}
+                </div>
+            </div>
             <a href="/" class="btn btn-primary">返回首页</a>
         </div>
     </div>

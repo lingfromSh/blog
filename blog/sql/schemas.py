@@ -127,6 +127,7 @@ class PostBase(BaseModel):
 
 
 class PostCreate(PostBase):
+    author_id: int
     status: Optional[int] = 0
     can_comment: Optional[bool] = True
 

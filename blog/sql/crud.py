@@ -23,11 +23,15 @@ def get_users(skip: int = 0, limit: int = 100):
 def create_user(user: schemas.UserCreate):
     fake_hashed_password = user.password + "not_really_hashed_password"
     fake_random_token = "fake_random_token"
-    db_user = models.User(username=user.username, hashed_password=fake_hashed_password, token=fake_random_token)
+    db_user = models.User(
+        username=user.username,
+        hashed_password=fake_hashed_password,
+        token=fake_random_token,
+    )
     try:
         db_user.save()
         return db_user
-    except  peewee.IntegrityError:
+    except peewee.IntegrityError:
         raise exceptions.UnprocessableEntityHTTPException(detail="用户名重复")
 
 
@@ -49,7 +53,9 @@ def get_tag(tag_id: int):
 
 
 def get_tags_of_user(user_id: int, skip: int = 0, limit: int = 100):
-    return list(models.Tag.filter(models.Tag.author_id == user_id).offset(skip).limit(limit))
+    return list(
+        models.Tag.filter(models.Tag.author_id == user_id).offset(skip).limit(limit)
+    )
 
 
 def create_tag(tag: schemas.TagCreate):
@@ -73,7 +79,7 @@ def delete_tag(tags: List[schemas.TagDelete]):
     for tag in tags:
         db_tag = get_tag(tag_id=tag.id)
         if not db_tag:
-            db_tag.delete()
+            db_tag.delete_instance(recursive=False)
 
 
 def get_catalog(catalog_id: int):
@@ -81,7 +87,11 @@ def get_catalog(catalog_id: int):
 
 
 def get_catalogs_of_user(user_id: int, skip: int = 0, limit: int = 100):
-    return list(models.Catalog.filter(models.Catalog.author_id == user_id).offset(skip).limit(limit))
+    return list(
+        models.Catalog.filter(models.Catalog.author_id == user_id)
+        .offset(skip)
+        .limit(limit)
+    )
 
 
 def create_catalog(catalog: schemas.CatalogCreate):
@@ -106,7 +116,7 @@ def delete_catalog(catalogs: List[schemas.CatalogDelete]):
     for catalog in catalogs:
         db_catalog = get_catalog(catalog_id=catalog.id)
         if not db_catalog:
-            db_catalog.delete()
+            db_catalog.delete_instance(recursive=False)
 
 
 def get_post(post_id: int):
@@ -114,7 +124,9 @@ def get_post(post_id: int):
 
 
 def get_posts_of_user(user_id: int, skip: int = 0, limit: int = 100):
-    return list(models.Post.filter(models.Post.author_id == user_id).offset(skip).limit(limit))
+    return list(
+        models.Post.filter(models.Post.author_id == user_id).offset(skip).limit(limit)
+    )
 
 
 def create_post(post: schemas.PostCreate):
@@ -129,22 +141,27 @@ def create_post(post: schemas.PostCreate):
 def update_post(post: schemas.PostUpdate):
     db_post = get_post(post.id)
     if db_post:
-        db_post.title = post.title
-        db_post.slug = post.slug
-        db_post.summary = post.summary
-        db_post.content = post.content
-        db_post.status = post.status
-        db_post.can_comment = post.can_comment
-        db_post.save()
+        try:
+            db_post.title = post.title
+            db_post.slug = post.slug
+            db_post.summary = post.summary
+            db_post.content = post.content
+            db_post.status = post.status
+            db_post.can_comment = post.can_comment
+            db_post.save()
+        except Exception:
+            import traceback
+
+            print(traceback.print_exc())
         return db_post
     return db_post
 
 
-def delete_post(posts: List[schemas.PostDelete]):
+def delete_post(posts: List[int]):
     for post in posts:
-        db_post = get_post(post_id=post.id)
+        db_post = get_post(post_id=post)
         if db_post:
-            db_post.delete()
+            db_post.delete_instance(recursive=False)
     return True
 
 
@@ -164,7 +181,7 @@ def delete_comment(comments: List[schemas.CommentDelete]):
     for comment in comments:
         db_comment = get_comment(comment_id=comment.id)
         if db_comment:
-            db_comment.delete()
+            db_comment.delete_instance(recursive=False)
 
 
 def create_comment(comment: schemas.CommentCreate):

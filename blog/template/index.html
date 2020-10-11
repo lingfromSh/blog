@@ -24,31 +24,32 @@
                 <a class="navbar-brand" href="/">
                     <h1>
                         Stephen Ling
-                        <h5>
-                            一个呆子的自述
-                        </h5>
                     </h1>
+                    <h5>
+                        一个呆子的自述
+                    </h5>
                 </a>
             </nav>
         </div>
         <div class="container">
             {% for post in posts %}
-            <div class="card">
+            <div class="card" style="margin-bottom: 1.5rem;">
                 <div class="card-body">
-                    <h2 class="card-title">{{ post.title }}</h2>
-                    <h5 class="card-text">
-                        {% if post.summary %}
-                        {{ post.summary }}
-                        {% else %}
-                        ...
-                        {% endif %}
-                    </h5>
-                    <a href="/post/{{ post.id }}" class="btn btn-primary">阅读全文</a>
+                    <div class="card-text">
+                        <h3>{{ post.title }}</h3>
+                        <p class="lead">{{ post.summary }}</p>
+                        <hr class="my-4">
+                        <p>
+                            {{ post.content }}
+                        </p>
+                    </div>
+                    <a class="btn btn-primary btn-lg" style="margin-bottom: 2rem;" href="/post/{{ post.id }}"
+                        role="button">阅读全文
+                    </a>
                 </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
     </div>
 </body>
 

@@ -22,4 +22,7 @@ app = "conf.application:app"
 #      Templates
 #########################
 
+from jinja_markdown import MarkdownExtension
+
 templates = Jinja2Templates(directory="template")
+templates.env.add_extension(MarkdownExtension)
