@@ -1,9 +1,11 @@
 ---
 title: Gitops Best Practice
-date: 2022-07-25 16:02:33
 tags:
-    - Kuberetes
-    - CloudNative
+  - Kuberetes
+  - CloudNative
+categories:
+  - cloud-native
+date: 2022-07-25 16:02:33
 ---
 # Gitops Best Practice
 

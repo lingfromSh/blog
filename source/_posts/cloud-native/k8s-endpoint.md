@@ -1,8 +1,10 @@
 ---
-title: K8S - Endpoint 
-date: 2022-07-19 23:42:05
+title: K8S - Endpoint
 tags:
-    - Kubernetes
+  - Kubernetes
+categories:
+  - cloud-native
+date: 2022-07-19 23:42:05
 ---
 
 # K8S Endpoint

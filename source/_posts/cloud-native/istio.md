@@ -1,10 +1,12 @@
 ---
 title: istio 从入门到入土
-date: 2022-07-18 01:59:14
 tags:
-    -  istio
-    -  ServiceMesh
-    -  CloudNative
+  - istio
+  - ServiceMesh
+  - CloudNative
+categories:
+  - cloud-native
+date: 2022-07-18 01:59:14
 ---
 # Istio 从入门到入土
 

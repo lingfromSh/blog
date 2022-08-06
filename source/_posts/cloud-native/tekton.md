@@ -1,10 +1,12 @@
 ---
 title: Tekton 云原生CICD流水线
-date: 2022-07-18 02:07:55
 tags:
-    - Tekton
-    - Pipeline
-    - CloudNative
+  - Tekton
+  - Pipeline
+  - CloudNative
+categories:
+  - cloud-native
+date: 2022-07-18 02:07:55
 ---
 # Tekton
 

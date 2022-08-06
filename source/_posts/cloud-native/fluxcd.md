@@ -1,9 +1,11 @@
 ---
-title: Gitops - ArgoCD vs FluxCD 
-date: 2022-07-25 10:57:03
+title: Gitops - ArgoCD vs FluxCD
 tags:
-    - Kuberetes
-    - CICD
+  - Kuberetes
+  - CICD
+categories:
+  - cloud-native
+date: 2022-07-25 10:57:03
 ---
 # ArgoCD vs FluxCD
 

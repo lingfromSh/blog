@@ -1,9 +1,11 @@
 ---
 title: 服务网格
-date: 2022-07-18 02:04:02
 tags:
-    - ServiceMesh
-    - CloudNative
+  - ServiceMesh
+  - CloudNative
+categories:
+  - cloud-native
+date: 2022-07-18 02:04:02
 ---
 # 服务网格
 
