@@ -70,3 +70,7 @@ int main(void)
     return 0;
 }
 ```
+
+### Preview of code
+
+![result-of-code](computer-graphics/opengl/opengl-01/code-result.png)

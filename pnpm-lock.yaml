@@ -4,8 +4,7 @@ specifiers:
   axios: ^0.27.2
   core-js: ^3.23.4
   hexo: ^6.2.0
-  hexo-asset: ^1.0.0
-  hexo-auto-category: ^0.2.1
+  hexo-deployer-git: ^3.0.0
   hexo-generator-archive: ^1.0.0
   hexo-generator-category: ^1.0.0
   hexo-generator-index: ^2.0.0
@@ -27,8 +26,7 @@ dependencies:
   axios: 0.27.2
   core-js: 3.23.4
   hexo: 6.2.0
-  hexo-asset: 1.0.0
-  hexo-auto-category: 0.2.1
+  hexo-deployer-git: 3.0.0
   hexo-generator-archive: 1.0.0
   hexo-generator-category: 1.0.0
   hexo-generator-index: 2.0.0
@@ -314,12 +312,6 @@ packages:
 
   /archy/1.0.0:
     resolution: {integrity: sha512-Xg+9RwCg/0p32teKdGMPTPnVXKD0w3DfHnFTficozsAgsvq2XenPJq/MYpzzQ/v8zrOyJn6Ds39VA4JIDwFfqw==}
-    dev: false
-
-  /argparse/1.0.10:
-    resolution: {integrity: sha512-o5Roy6tNG4SL/FOkCAN6RzjiakZS25RLYFrcMttJqbdd8BWrnA+fGz57iN5Pb06pvBGvl5gQ0B48dJlslXvoTg==}
-    dependencies:
-      sprintf-js: 1.0.3
     dev: false
 
   /argparse/2.0.1:
@@ -910,17 +902,6 @@ packages:
       function-bind: 1.1.1
     dev: false
 
-  /hexo-asset/1.0.0:
-    resolution: {integrity: sha512-DnYepoIRPb9nVCdjkgHWRYUi13aeLPxnyBxc++uXPNRZqjzQ6TmUW17Xh90h1osQMLsryIrq+bkarYf4vdGdmg==}
-    dev: false
-
-  /hexo-auto-category/0.2.1:
-    resolution: {integrity: sha512-kIHa+0XV7CZHlcFV9Jg8FJdngLqCBtubSEcXveZMr5D6wftE+Zg3kv4R+xi+nE7wAfDSRW37TUqfgFusrf92Yw==}
-    dependencies:
-      hexo-front-matter: 2.0.0
-      hexo-fs: 3.1.0
-    dev: false
-
   /hexo-cli/4.3.0:
     resolution: {integrity: sha512-lr46h1tK1RNQJAQZbzKYAWGsmqF5DLrW6xKEakqv/o9JqgdeempBjIm7HqjcZEUBpWij4EO65X6YJiDmT9LR7g==}
     engines: {node: '>=10.13.0'}
@@ -938,11 +919,18 @@ packages:
       tildify: 2.0.0
     dev: false
 
-  /hexo-front-matter/2.0.0:
-    resolution: {integrity: sha512-IR3tjAyK2Ga/0a/WDAoNy5+n3ju2/mkuAsCDEeGgGLf5+7kkiOkkG/FrnueuYgz0h2MPfWDLBiDsSTCmB0sLCA==}
-    engines: {node: '>=10.13.0'}
+  /hexo-deployer-git/3.0.0:
+    resolution: {integrity: sha512-U2Xewjab+rvUDNTcuYYnOxitkDXL3f5VMUH32jKDHs3OC4YFVGRoEaTTDVHskqr3KRi78Wohjc6BSRHOoG3oxA==}
+    engines: {node: '>=8.6.0'}
     dependencies:
-      js-yaml: 3.14.1
+      bluebird: 3.7.2
+      chalk: 4.1.2
+      hexo-fs: 3.1.0
+      hexo-util: 2.6.1
+      moment: 2.29.4
+      nunjucks: 3.2.3
+    transitivePeerDependencies:
+      - chokidar
     dev: false
 
   /hexo-front-matter/3.0.0:
@@ -1300,14 +1288,6 @@ packages:
   /js-yaml-js-types/1.0.0:
     resolution: {integrity: sha512-UNjPwuoaj4mcHkJCJSF6l4MgkzoFjG+JJkBXMYNvjgO3yE9gTeRt+E6PN022vduz/daZZ7HmlEiSEE36NrGE4w==}
     dependencies:
-      esprima: 4.0.1
-    dev: false
-
-  /js-yaml/3.14.1:
-    resolution: {integrity: sha512-okMH7OXXJ7YrN9Ok3/SXrnu4iX9yOk+25nqX4imS2npuvTYDmo/QEZoqwZkYaIDk3jVvBOTOIEgEhaLOynBS9g==}
-    hasBin: true
-    dependencies:
-      argparse: 1.0.10
       esprima: 4.0.1
     dev: false
 
@@ -1873,10 +1853,6 @@ packages:
 
   /sourcemap-codec/1.4.8:
     resolution: {integrity: sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==}
-    dev: false
-
-  /sprintf-js/1.0.3:
-    resolution: {integrity: sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==}
     dev: false
 
   /sprintf-js/1.1.2:

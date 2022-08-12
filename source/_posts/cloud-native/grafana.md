@@ -92,4 +92,4 @@ helm install prometheus prometheus-community/prometheus
 
 ## 6. 搭建Grafana仪表盘
 
-![dashboard](./grafana/2022-08-06_14-11.png)
+![img](cloud-native/grafana/2022-08-06_14-11.png)
