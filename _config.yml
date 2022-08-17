@@ -102,8 +102,3 @@ theme: aurora
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
-deploy:
-  type: 'git'
-  repo: 'https://github.com/lingfromSh/blog.git'
-  branch: 'master'
-  token: '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'
