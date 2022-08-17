@@ -20,6 +20,10 @@ date: 2022-08-17 23:50:58
 
 - [Graphene](https://graphene-python.org/) GraphQL python实现
 
+## ORM
+
+- [Tortoise-ORM](https://tortoise-orm.readthedocs.io/en/latest/) 异步ORM
+
 ## Django Related
 
 - [Django-Channels](https://github.com/django/channels) 提供django websocket能力和少部分异步能力
