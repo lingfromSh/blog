@@ -47,6 +47,9 @@ menu:
   About: false
   Tags: true
   Archives: true
+  python:
+    name: 'Python'
+    path: '/page/python'
 
 #! ---------------------------------------------------------------
 #! Theme Config
