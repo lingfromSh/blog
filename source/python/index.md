@@ -31,3 +31,9 @@ date: 2022-08-17 23:50:58
 - [Django-SSE](https://github.com/fanout/django-eventstream) SSE 依赖Django-Channels
 - [Django-LifeCycle](https://github.com/rsinger86/django-lifecycle) 更简单的模型信号回调
 - [Django-EAV2](https://github.com/jazzband/django-eav2) eav实现
+
+## 服务器
+
+- [UWSGI](https://github.com/unbit/uwsgi) 
+- [Uvicorn](https://github.com/encode/uvicorn)
+- [HyperCorn](https://github.com/pgjones/hypercorn) 
