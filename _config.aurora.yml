@@ -50,6 +50,9 @@ menu:
   python:
     name: 'Python'
     path: '/page/python'
+  backend-developer:
+    name: 'Backend Developer Route'
+    path: '/page/top-tier-backend-developer'
 
 #! ---------------------------------------------------------------
 #! Theme Config

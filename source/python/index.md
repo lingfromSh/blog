@@ -3,7 +3,7 @@ title: Python
 date: 2022-08-17 23:50:58
 ---
 
-# Python Web 开发
+# Python
 
 ## Framework
 
